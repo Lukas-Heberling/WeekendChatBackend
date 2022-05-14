@@ -1,4 +1,6 @@
+import { response } from "express";
 import createUser from "../Model/User/createUser.js";
+import loginUser from "../Model/User/loginUser.js";
 
 class user {
   constructor (newConnection) {
@@ -12,7 +14,6 @@ class user {
    */
   createNewUser(req, res) {
     const { name, password } = req.params;
-    /** calling the model t a create a new user */
     createUser(
       this.connection,
       name,
@@ -25,6 +26,21 @@ class user {
       res.send(error);
     });
   };
+
+  authenticateUser(req, res) {
+    const {name, password} = req.params;
+    loginUser(
+      this.connection,
+      name,
+      password
+    )
+    .then((response) => {
+      res.send(response);
+    })
+    .catch((error) => {
+      res.send(error);
+    });
+  }
 
 }
 

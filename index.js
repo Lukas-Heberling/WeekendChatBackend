@@ -30,5 +30,8 @@ app.get('/', (req, res) => res.send("Hello, World!"));
 /** Create User */
 app.get('/create_user/:name/:password', (req, res) => userController.createNewUser(req, res));
 
+/** Authentication */
+app.get('/login/:name/:password', (req, res) => userController.authenticateUser(req, res));
+
 app.listen(port);
 console.log(`Server started on port ${port}`);
