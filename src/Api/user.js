@@ -1,4 +1,3 @@
-import { response } from "express";
 import createUser from "../Model/User/createUser.js";
 import loginUser from "../Model/User/loginUser.js";
 

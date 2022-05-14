@@ -2,6 +2,7 @@ import express from 'express';
 import mysql from 'mysql';
 
 import user from './src/Api/user.js';
+import chat from './src/Api/chat.js';
 
 /** Init express */
 const app = express()
@@ -16,6 +17,7 @@ const connection = mysql.createConnection({
 });
 
 const userController = new user(connection);
+const chatController = new chat(connection);
 
 /** ALLOWING CROOS ORIGIGN REQUESTS */
 app.use((_, res, next) => {
@@ -33,5 +35,14 @@ app.get('/create_user/:name/:password', (req, res) => userController.createNewUs
 /** Authentication */
 app.get('/login/:name/:password', (req, res) => userController.authenticateUser(req, res));
 
+/** Chats */
+app.get('/getAllchats', (req, res) => chatController.getAllChats(req, res));
+
 app.listen(port);
 console.log(`Server started on port ${port}`);
+
+
+/** Current Problems:
+ * you could request all the chats without being logged in
+ * sql injection
+ */
