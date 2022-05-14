@@ -1,0 +1,16 @@
+{
+  "name": "weekend_chat_backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "author": "Lukas",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.1",
+    "moment": "^2.29.3",
+    "mysql": "^2.18.1"
+  }
+}
