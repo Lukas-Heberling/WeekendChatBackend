@@ -29,14 +29,19 @@ app.use((_, res, next) => {
 /** Request Handlers */
 app.get('/', (req, res) => res.send("Hello, World!"));
 
-/** Create User */
+/** ############# USER ############# */
+/** create new user */
 app.get('/create_user/:name/:password', (req, res) => userController.createNewUser(req, res));
 
-/** Authentication */
+/** login user */
 app.get('/login/:name/:password', (req, res) => userController.authenticateUser(req, res));
 
-/** Chats */
+/** ############# Chats ############# */
+/** get all chats */
 app.get('/getAllchats', (req, res) => chatController.getAllChats(req, res));
+
+/** get a chat */
+app.get('/getChat/:from/:to', (req, res) => chatController.getChat(req, res));
 
 app.listen(port);
 console.log(`Server started on port ${port}`);
