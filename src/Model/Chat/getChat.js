@@ -5,9 +5,9 @@ const getChat = (connection, userId1, userId2) => {
     const queryString = `
       SELECT *
       FROM messages
-      WHERE fromUser = ("${userId1}" || "${userId2}")
-      AND toUser = ("${userId1}" || "${userId2}")
-      ORDER BY time DESC
+      where (fromUser = ${userId1} or fromUser = ${userId2})
+      AND (toUser = ${userId1} or toUser = ${userId2})
+      ORDER BY time ASC;
     `;
     connection.query(queryString, (error, rows) => {
       if (error) {
