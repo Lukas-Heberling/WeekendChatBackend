@@ -4,10 +4,10 @@ import createClientResponse from "../../Helper/createClientResponse.js";
  * get all the possible chats
  * @param {Object} connection connection to the database
  */
-const getChats = (connection) => {
+const getChats = (connection, id) => {
   return new Promise((resolve, reject) => {
     const queryString = `
-      SELECT name, id FROM user;
+      SELECT name, id FROM user WHERE id != ${id};
     `
     connection.query(queryString, (error, rows) => {
       if (error) {
@@ -17,9 +17,10 @@ const getChats = (connection) => {
         ))
       }
       if (rows && rows[0]) {
+        const chatAmount = rows.length;
         resolve(createClientResponse(
           true,
-          [`${rows.lentgh} possible chats found`],
+          [`${chatAmount} possible ${chatAmount > 1 ? 'chats' : 'chat'} found`],
           rows
         ));
       } else {

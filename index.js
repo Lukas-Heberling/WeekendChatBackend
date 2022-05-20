@@ -40,7 +40,7 @@ app.get('/login/:name/:password', (req, res) => userController.authenticateUser(
 
 /** ############# Chats ############# */
 /** gets all the chats / users that the user can chat with */
-app.get('/get_all_chats', (req, res) => chatController.getAllChats(req, res));
+app.get('/get_chats/:id', (req, res) => chatController.getAllChats(req, res));
 
 /** gets a single chat including all the messages */
 app.get('/get_chat/:from/:to', (req, res) => chatController.getChat(req, res));

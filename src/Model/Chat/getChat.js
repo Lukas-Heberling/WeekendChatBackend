@@ -3,8 +3,18 @@ import createClientResponse from "../../Helper/createClientResponse.js";
 const getChat = (connection, userId1, userId2) => {
   return new Promise((resolve, reject) => {
     const queryString = `
-      SELECT *
+      SELECT
+        sendBy.name as sender, 
+          fromUser,
+          toUser,
+          message,
+          time
       FROM messages
+      LEFT JOIN (
+      SELECT name, id
+      FROM user
+      ) sendBy
+      ON sendBy.id = messages.fromUser
       where (fromUser = ${userId1} or fromUser = ${userId2})
       AND (toUser = ${userId1} or toUser = ${userId2})
       ORDER BY time ASC;

@@ -12,7 +12,8 @@ class chat {
    * @param {Object} res resolve object
    */
   getAllChats(req, res) {
-    getChats(this.connection)
+    const {id} = req.params;
+    getChats(this.connection, id)
     .then((response) => res.send(response))
     .catch((error) => res.send(error));
   };
